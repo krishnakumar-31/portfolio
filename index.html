@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>krishna kumar</title>
+  <meta name="description" content="Your Name — Frontend Developer (dark theme portfolio)" />
+  <style>
+    /* DARK THEME - Inline CSS */
+    :root{
+      --bg:#0b0b0b; /* deep dark */
+      --panel:#1a1a1a; /* slightly lighter */
+      --glass: rgba(255,255,255,0.03);
+      --muted: #b0a8a3;
+      --accent: #ff4c29; /* warm orange */
+      --accent-2: #ff6f3c; /* lighter orange */
+      --card-shadow: 0 10px 30px rgba(255,76,41,0.4);
+      --radius:14px;
+      --max-w:1100px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; background:
+      radial-gradient(1200px 400px at 10% 10%, rgba(255,76,41,0.1), transparent),
+      radial-gradient(900px 300px at 85% 80%, rgba(255,111,60,0.08), transparent),
+      var(--bg);
+      color:#eee; -webkit-font-smoothing:antialiased; line-height:1.45;
+      padding-bottom:80px;
+    }
+
+    a {color:inherit; text-decoration:none;}
+    .wrap {max-width:var(--max-w); margin:0 auto; padding:20px;}
+
+    header {
+      position:sticky; top:12px; z-index:50; display:flex;
+      align-items:center; justify-content:flex-end; gap:12px;
+      margin:12px auto; max-width:var(--max-w); padding:10px;
+    }
+    .brand {
+      display:flex; align-items:center; gap:12px;
+    }
+    /* .logo {
+      width:56px; height:56px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; font-weight:800;
+      color:#1a0b00; font-size:18px;
+    } */
+    .title {
+      line-height:1;
+    }
+    .title .name {
+      font-weight:800; font-size:16px;
+    }
+    .title .role {
+      font-size:12px; color: var(--muted); margin-top:2px;
+    }
+
+    nav {
+      display:flex; gap:10px; align-items:center;
+    }
+    nav a {
+      padding:8px 10px; border-radius:10px; font-weight:700;
+      font-size:14px; color: var(--muted);
+      transition: all .16s;
+    }
+    nav a:hover {
+      color: var(--accent); transform: translateY(-3px);
+    }
+
+    .hamburger {
+      display:none; background:transparent; border:0;
+      padding:8px; border-radius:10px; color: var(--muted);
+      cursor:pointer;
+    }
+    @media (max-width:880px){
+      nav {display:none;}
+      .hamburger {display:inline-flex;}
+    }
+
+    /* Hero section */
+    .hero {
+      margin:18px auto 26px; background: linear-gradient(180deg, rgba(255,76,41,0.02), rgba(255,111,60,0.01));
+      border-radius:18px; padding:26px; display:grid;
+      grid-template-columns:1fr 340px; gap:20px;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(6px);
+    }
+    @media (max-width:880px){
+      .hero {
+        grid-template-columns:1fr; padding:18px;
+      }
+    }
+    .hero h1 {
+      margin:0; font-size:28px;
+    }
+    .hero p {
+      color: var(--muted); margin-top:10px;
+    }
+    .ctas {
+      display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;
+    }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:12px; border:0;
+      cursor:pointer; font-weight:800; user-select:none;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color:#1a0b00;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,76,41,0.25);
+      color: var(--muted);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(255,76,41,0.1);
+    }
+
+    .profile {
+      background: linear-gradient(180deg, rgba(255,76,41,0.02), rgba(255,111,60,0.01));
+      padding:16px; border-radius:5px; text-align:center;
+      
+    }
+    .avatar {
+      width:150px; height:150px; border-radius:50%;
+      object-fit:cover; border:4px solid rgba(255,76,41,0.2);
+
+      
+    }
+    .socials {
+      display:flex; gap:8px; justify-content:center; margin-top:10px;
+    }
+    .sbtn {
+      display:inline-grid; place-items:center;
+      width:38px; height:38px; border-radius:10px;
+      background:rgba(255,76,41,0.1);
+      border:1px solid rgba(255,111,60,0.2);
+      cursor:pointer;
+      transition:background 0.2s ease;
+    }
+    .sbtn:hover {
+      background: var(--accent);
+      color: #1a0b00;
+    }
+
+    main {
+      max-width: var(--max-w);
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .section {
+      margin-bottom: 34px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
+    }
+    .section.show {
+      opacity: 1;
+      transform: none;
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      color: var(--accent-2);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width:980px){
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width:640px){
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,76,41,0.02), rgba(255,111,60,0.01));
+      padding:14px;
+      border-radius:12px;
+      box-shadow: 0 12px 30px rgba(255,76,41,0.3);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .project-links a {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,111,60,0.2);
+      font-weight: 700;
+      color: var(--muted);
+      margin-left: 6px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .project-links a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .skills-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skill-bar {
+      height: 10px;
+      background: rgba(255,76,41,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      width: 0;
+      transition: width 0.9s cubic-bezier(0.2, 0.9, 0.25, 1);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+    }
+    @media (max-width:880px){
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form input, .form textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,76,41,0.2);
+      background: transparent;
+      color: inherit;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      padding: 18px;
+    }
+
+    .float {
+      position: fixed;
+      right: 18px;
+      bottom: 22px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      padding: 12px;
+      border-radius: 999px;
+      color: #1a0b00;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      z-index: 40;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @media (max-width:520px){
+      .logo {
+        width: 48px;
+        height: 48px;
+      }
+    }
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline: 3px solid rgba(255,111,60,0.3);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap" role="banner">
+    <div class="brand">
+      <!-- <div class="logo"></div> -->
+      <div class="title">
+        <!-- <div class="name">G Krishna Kumar</div> -->
+        <div class="role"><div>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#work">project</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="hamburger" aria-expanded="false" title="open menu" aria-controls="mobile-nav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+
+  <section class="hero wrap" id="hero">
+    <div>
+      <h1>Hi, I’m <span style="color:var(--accent-2)">G krishna kumar</span></h1>
+      <p>Hardworking College Student seeking employment. I build modern, accessible, and responsive interfaces using HTML, CSS, and JavaScript. I’m passionate about UI, interaction, and performance.</p>
+
+      <div class="ctas">
+        <!-- <a class="btn btn-primary" href="#work">Get a project</a> -->
+        <a class="btn btn-outline" href="./src/My resume (1).pdf">My resume</a>
+      </div>
+
+      <!-- <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <span style="background:rgba(255,76,41,0.05); padding:8px 10px; border-radius:999px; font-weight:700">Your Location</span>
+        <span style="background:rgba(255,76,41,0.05); padding:8px 10px; border-radius:999px; font-weight:700">Open to opportunities</span>
+      </div> -->
+    </div>
+
+    <aside class="profile" aria-label="Profile">
+      <img class="avatar" src="./src/profile.png" alt="Your Name avatar">
+      <div style="font-weight:800; margin-top:8px">G krishna kumar</div>
+      <div style="color:var(--muted); font-size:13px; margin-top:6px">Krishnasgk003@gmail.com ,+91 9061289590</div>
+
+      <!-- <div class="socials" style="margin-top:10px" aria-label="Social media links">
+        <a class="sbtn" href="https://www.instagram.com/k_r_i_s_h_n_a_n___?igsh=MWd3bjV6czgwa3ZibA==" title="Instagram" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.2"/><path d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+        </a>
+        <a class="sbtn" href="https://www.facebook.com/share/14MPR6RbAr4/"me title="Facebook" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 3h3v4h-3v14h-4V7H9V3h4V1.8C13 0.8 14 0 15.6 0 17.6 0 19 1.4 19 3.9V3z" fill="currentColor"/></svg>
+        </a>
+        <a class="sbtn" href="https://www.linkedin.com/in/g-krishna-kumar-075a3437a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8.5h4.52V24H.24V8.5zM8.98 8.5h4.34v2.08h.06c.6-1.14 2.06-2.34 4.24-2.34 4.54 0 5.38 2.98 5.38 6.84V24h-4.52v-7.46c0-1.78-.03-4.06-2.47-4.06-2.47 0-2.85 1.93-2.85 3.92V24H8.98V8.5z" fill="currentColor"/></svg>
+        </a> -->
+      </div>
+    </aside>
+  </section>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="section wrap" tabindex="-1">
+      <h2>About</h2>
+      <div style="display:flex; gap:18px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:260px;">
+          <div class="card">
+            <p style="margin:0; color:var(--muted)">
+              Hardworking College Student seeking employment. Bringing forth a motivated attitude and variety of powerful skills. Adept in various social media platforms and office technology programs. Committed to utilizing my skills to further the mission of a company.
+            </p>
+            <ul style="margin:12px 0 0; padding-left:18px; color:var(--muted)">
+              <li>Alappuzha,chenganuur</li>
+              <li>Contact: <a href="krishnasgk003@gmail.com">Krishnasgk003@gmail.com ,</a>+91 9061289590</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- <div style="flex-basis:320px; min-width:260px;">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <strong>Experience</strong>
+              <small style="color:var(--muted)">Student & projects</small>
+            </div>
+            <p style="margin:0; color:var(--muted); font-size:14px;">
+              Worked on academic and personal projects using HTML, CSS, Bootstrap, JS, python and small PHP backends. Focused on clean UI and usability.
+            </p>
+
+            <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">HTML</span>
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">CSS</span>
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">JavaScript</span>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="section wrap" tabindex="-1">
+      <h2> Projects</h2>
+      <div class="grid" style="margin-top:12px;">
+        <article class="card">
+          <img class="project-img" src="https://via.placeholder.com/800x450.png?text=Smart+Farming" alt="project 1">
+          <h3 style="margin:0 0 6px;">Smart Farming — E-commerce</h3>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:14px;">
+           The Smart Farming Platform is a comprehensive web application designed to
+facilitate seamless transactions between farmers and buyers, enhancing the
+agricultural market’s efficiency and accessibility. This platform provides distinct
+interfaces and functionalities for different user types, including farmers, buyers, and
+administrators, each tailored to meet their specific needs
+          </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--muted); font-size:13px;">Tech: HTML • CSS • JS • PHP</div>
+            <div class="project-links">
+              <a href="#">Demo</a><a href="#">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="project-img" src="https://via.placeholder.com/800x450.png?text=Face+Recognition" alt="project 2">
+          <h3 style="margin:0 0 6px;">Face Recognition Attendance</h3>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:14px;">
+
+Developed an automated attendance system using Haar classifiers, KNN, CNN, SVM, GANs, and Gabor filters for real-time face recognition. The system replaces manual attendance with a digital, proxy-free process and generates attendance reports in Excel format. Tested for accuracy under varied illumination, head movement, and distance conditions, ensuring high reliability and cost efficiency. </p>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--muted); font-size:13px;">Tech: Python • OpenCV • ML</div>
+            <div class="project-links">
+              <!-- <a href="#">Demo</a><a href="#">Code</a> -->
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="project-img" src="https://via.placeholder.com/800x450.png?text=Project+3" alt="Project 3">
+          <h3 style="margin:0 0 6px;">TIC TAK TOE</h3>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:14px;">
+           This project aims to create an engaging web-based Tic-Tac-Toe game where players compete against an intelligent AI opponent. The game features multiple difficulty levels, allowing users to challenge themselves progressively.
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--muted); font-size:13px;">Tech: ...</div>
+            <div class="project-links">
+              <!-- <a href="#">Demo</a><a href="#">Code</a> -->
+            </div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="project-img" src="https://via.placeholder.com/800x450.png?text=Project+3" alt="Project 4">
+          <h3 style="margin:0 0 6px;">Ludo Board</h3>
+          <p style="margin:0 0 10px; color:var(--muted); font-size:14px;">
+           Created a visual representation of the Ludo board using Python’s Turtle graphics module. The project focuses on drawing the board layout, color zones, and player paths to accurately depict the game structure. Emphasized coordinate geometry, modular code, and graphical design principles to
+build an interactive static interface.
+
+
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--muted); font-size:13px;">Tech: ...</div>
+            <div class="project-links">
+              <!-- <a href="#">Demo</a><a href="#">Code</a> -->
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section wrap" tabindex="-1">
+      <h2>Skills</h2>
+      <div style="display:flex; gap:18px; flex-wrap:wrap; margin-top:12px;">
+        <div style="flex:1; min-width:260px;">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <strong>Frontend</strong>
+              <small style="color:var(--muted);">Proficiency</small>
+            </div>
+            <div style="margin-top:12px;" class="skills-row">
+              <div style="display:flex; justify-content:space-between; font-weight:700;">
+                <span>HTML</span><span style="color:var(--muted);">95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-fill="95%"></div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; font-weight:700;">
+                <span>CSS</span><span style="color:var(--muted);">80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-fill="88%"></div>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; font-weight:700;">
+                <span>JavaScript</span><span style="color:var(--muted);">68%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-fill="76%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-basis:320px; min-width:260px;">
+          <div class="card">
+            <strong>Tools</strong>
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">VS Code</span>
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">Git</span>
+              <span style="background:rgba(255,76,41,0.05); padding:8px 12px; border-radius:999px; font-weight:700;">Figma</span>
+            </div>
+            <p style="margin-top:10px; color:var(--muted); font-size:14px;">
+              Focus on accessible UI, modern CSS, and performant JavaScript.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section wrap" tabindex="-1">
+      <h2>Contact</h2>
+      <div class="contact-wrap" style="margin-top:12px;">
+        <div class="card form">
+          <form onsubmit="event.preventDefault(); sendContact()">
+            <label style="display:block; margin-bottom:6px; font-weight:700;" for="cname">Your name</label>
+            <input required id="cname" type="text" placeholder="Your name" aria-required="true" />
+            <label style="display:block; margin:10px 0 6px; font-weight:700;" for="cemail">Email</label>
+            <input required id="cemail" type="email" placeholder="you@example.com" aria-required="true" />
+            <label style="display:block; margin:10px 0 6px; font-weight:700;" for="cmessage">Message</label>
+            <textarea required id="cmessage" rows="6" placeholder="Say hi — what are you looking for?" aria-required="true"></textarea>
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <button class="btn btn-outline" type="reset">Reset</button>
+            </div>
+            <div id="cstatus" role="status" aria-live="polite" style="margin-top:8px; color:var(--muted); display:none;"></div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="card">
+            <strong>Get in touch</strong>
+            <p style="margin-top:8px; color:var(--muted);">
+            <a href="mailto:your.email@example.com">Krishnasgk003@gmail.com</a>
+            </p>
+            <div style="margin-top:12px;">
+              <strong>Follow</strong>
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <a href="https://github.com/krishnakumar-31" style="text-decoration:none; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,111,60,0.2);">GitHub</a>
+                <a href="https://www.linkedin.com/in/g-krishna-kumar-075a3437a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="text-decoration:none; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,111,60,0.2);">LinkedIn</a>
+                <a href="https://www.instagram.com/k_r_i_s_h_n_a_n___?igsh=MWd3bjV6czgwa3ZibA==" style="text-decoration:none; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,111,60,0.2);">Instagram</a>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; color:var(--muted); font-size:14px;">
+              <div><strong>Location</strong></div>
+              <div>Alappuzha,chenganuur</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" role="contentinfo">
+    <div style="text-align:center; color:var(--muted);">© <span id="year">2025</span> G krishna kumar — Built with HTML, CSS & JS</div>
+  </footer>
+
+  <a class="float" href="#contact" aria-label="Let's talk">Let's talk</a>
+
+  <script>
+    // dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // resume download simulation (if you want to implement, customize here)
+
+    // simple contact "send" simulation
+    function sendContact(){
+      const name = document.getElementById('cname').value.trim();
+      const email = document.getElementById('cemail').value.trim();
+      const msg = document.getElementById('cmessage').value.trim();
+      const status = document.getElementById('cstatus');
+      if(!name || !email || !msg){ 
+        status.style.display='block'; 
+        status.textContent='Please complete all fields.'; 
+        return; 
+      }
+      status.style.display='block'; 
+      status.textContent='Sending...';
+      setTimeout(()=>{
+        status.textContent='Message sent — this is a demo. I will respond soon.';
+        document.querySelector('.form form').reset();
+      }, 900);
+    }
+
+    // scroll reveal animation
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ 
+          e.target.classList.add('show'); 
+          observer.unobserve(e.target); 
+        }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.section').forEach(s=>observer.observe(s));
+
+    // animate skill bars when in view
+    const fills = document.querySelectorAll('.skill-fill');
+    const fillObs = new IntersectionObserver((entries)=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          const el = ent.target;
+          el.style.width = el.getAttribute('data-fill');
+          fillObs.unobserve(el);
+        }
+      });
+    }, {threshold:0.2});
+    fills.forEach(f=>fillObs.observe(f));
+
+    // smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',(ev)=>{
+        const h = a.getAttribute('href');
+        if(h.length>1){
+          ev.preventDefault();
+          const el = document.querySelector(h);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
